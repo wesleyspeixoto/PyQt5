@@ -1,0 +1,32 @@
+<html>
+<head>
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Data transition between pyqt5 and javascript!</h2>
+	<button  onclick="fun1();">Js to PyQt5</button>
+	<button  onclick="fun2();">PyQt5 to Js</button>
+	<p id="p1"></p>
+  </div>
+  <script language="JavaScript">
+    function fun1(){
+	new QWebChannel(qt.webChannelTransport, function (channel) {
+	  window.handler = channel.objects.handler;
+	  handler.Receive('hello!')
+	});
+	}
+	function fun2(){
+	new QWebChannel(qt.webChannelTransport, function (channel) {
+	  window.handler = channel.objects.handler;
+	  handler.Send(function(retVal) {
+	    var value = JSON.stringify(retVal);
+		document.getElementById("p1").innerHTML = value;
+	  })
+	});
+	}
+  </script>
+
+</body>
+</html>
