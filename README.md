@@ -1,1 +1,1 @@
-PyQt5 Webengine FullScreen
+PyQt5 Projects
